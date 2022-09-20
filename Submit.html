@@ -1,0 +1,18 @@
+<html>
+<head>
+<title>Your form is submitted</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+<h1 style="text-align:center;">Your form is submitted</h1>
+<button onclick="send()">Change the value of the input text</button>
+<input type="text" id="text">
+<script>
+function send(){
+let vText = document.getElementById('text')
+let sampleText = "Hello how are you"
+vText.value=sampleText
+}
+</script>
+</body>
+</html>
