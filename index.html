@@ -1,78 +1,49 @@
 <html>
 <head>
-<title>Player Registration Form</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admission form</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<style>
+input{
+width:240px;
+height:30px;
+font-size:20px;
+}
+form{
+   margin-left: 43%;
+   margin-right:43%;
+   width: 50%;
+width:400px;
+text-align:center;
+align-items:center;
+border: 2px solid black;
+background: skyblue;
+}
+h1{
+text-align:center;
+}
+.form-txt{
+font-size:20px;
+background:orange;
+}
+</style>
 </head>
-<body bgcolor="yellow">
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-
-<table>
-<h1 style="color:red; background-color:black;">Chess Player Registration</h1><br>
-<hr>
-<form onsubmit="event.preventDefault()"name="myForm" method="Post">
- <p style="background-color:skyblue; border:4px solid black; width:300; height:500;">First Name:  <input id="firstName"style="background-color:white;" style="color:red;"  type="text"> <br><br>
- Last Name:  <input id="lastName" style="color:blue; background-color:white;" type="text"> <br><br>
- Email id : <input id="email"style="color:#57312d; background-color:white;" type="text"><br><br>
-Gender :    <select id="gender"style="color:orange; background-color:white;" name = Gender"><br><br>
-<option value = "MALE">MALE</option>
-<option value = "FEMALE">FEMALE</option> </select><br><br>
-Date Of Birth:    <input id="DOB"style="background-color:white;" name="btn" type="date"><br><br>
-
-State :<select id="state"style="color:orange; background-color:white;" name = Gender"><br><br>
-<option value = "kerala">Kerala</option>
-<option value = "New Delhi">New Delhi</option>
-<option value = "Arunachal Pradesh">Arunachal Pradesh</option>
-<option value = "madhya Pradesh">Madhya Pradesh</option>
-<option value = "Bihar">Bihar</option>
-<option value = "Andhra Pradesh">Andhra Pradesh</option>
-<option value = "Telengana">Telengana</option>
-<option value = "Uttar Pradesh">Uttar Pradesh</option>
-<option value = "Maharashtra">Maharashtra</option>
-<option value = "Tamil Nadu">Tamil Nadu</option>
-<option value = "Bengaluru">Bengaluru</option>
-<option value = "Goa">Goa</option>
-<option value = "Gujarat">Gujarat</option>
-<option value = "Assam">Assam</option>
-<option value = "Sikkim">Sikkim</option>
-<option value = "Meghalaya">Meghalaya</option>
-<option value = "Haryana ">Kerala</option>
-<option value = "Manipur">New Delhi</option>
-<option value = "Punjab">Kerala</option>
-<option value = "Odisha">New Delhi</option>
-<option value = "Nagaland">Kerala</option>
-<option value = "Mizoram">New Delhi</option>
-<option value = "Rajasthan">Kerala</option>
-<option value = "Uttarakhand">New Delhi</option>
-<option value = "Tripura">Kerala</option>
-<option value = "West Bengal">New Delhi</option>
-<option value = "Jharkand">Kerala</option>
-<option value = "Chattisgarh">New Delhi</option>
-</select><br><br>
-
-
-District : <input id="district"style="background-color:white;" style="color:black;" type="text"><br><br>
-City : <input id="city"style="color:purple; background-color:white;" type="text"><br><br>
-Pincode : <input id="pincode"style="color:dark pink; background-color:white;" type="text"><br><br>
-Player <input name="btn" type="radio">
-Arbiter <input  name="btn" type="radio">
-Trainer <input name="btn" type="radio"><br><br>
-Date of Birth Certificate :<br><br> <input style="background-color:white;" type="file"><br><br>
-<button onclick="send()">Submit</button>
-</p>
+<body>
+<h1 style="display:none;"id="show">Your form is submitted</h1>
+<h1 style="display:none; text-align:center;" id="h1">School form</h1>
+<button onclick="retrieve()">see the submittes form</button>
+<form id="form"align="center" onsubmit="event.preventDefault()">
+<table align="center">
+ <tr><td align="center"><div class="form-txt">Name:</div><input type="text" id="idname"></td></tr>
+ <tr><td align="center"><div class="form-txt">Mobile number:</div><input type="text" id="mobile-number"></td></tr>
+<tr><td align="center"><div class="form-txt">Email Id:</div><input type="email" id="email"></td></tr>
+<tr><td align="center"><div class="form-txt">Roll number:</div><input type="text" id="roll-number"></td></tr>
+<tr><td align="center"><input type="submit" onclick="send()" action="Submit.html"></td></tr>
 </table>
 </form>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script>
-function send(){
-const firstName = document.getElementById('firstName').value
-const lastName = document.getElementById('lastName').value
-const email = document.getElementById('email').value
-const gender = document.getElementById('gender').value
-const DOB = document.getElementById('DOB').value
-const state = document.getElementById('state').value
-const city = document.getElementById('city').value
-const pincode = document.getElementById('pincode').value
-
 const firebaseConfig = {
   apiKey: "AIzaSyB2dc7G54nZg1H-tKUbxRtWmADEQxRJv10",
   authDomain: "simple-login-page-736b4.firebaseapp.com",
@@ -85,17 +56,48 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig)
 let database = firebase.firestore()
-database.collection("Chess player registration")
-  .add({
-    FIRSTNAME: firstName,
-	LASTNAME: lastName,
-	EMAIL : email,
-	GENDER: gender,
-	DOB: DOB,
-	STATE: state,
-	CITY: city,
-	PINCODE: pincode
-  })
+
+function send(){
+let vName = document.getElementById('idname')
+let vMobNumber = document.getElementById('mobile-number').value
+let vEmail = document.getElementById('email').value
+let vRoll = document.getElementById('roll-number').value
+
+database.collection("School form information")
+.add({
+NAME: vName.value,
+MOBILENo: vMobNumber,
+EMAILID:vEmail,
+ROLLNo:vRoll,
+})
+document.getElementById('form').style.display='none'
+document.getElementById('h1').style.display='none'
+document.getElementById('show').style.display='inline'
+/*if(database.collection('School form information').get())
+{
+window.location.href = "Submit.html";
+}*/
+}
+function retrieve(){
+database.collection('School form information')
+.get()
+.then((querySnapshot) => {
+querySnapshot.forEach((doc) => {
+let savedNum = doc.data().ROLLNo
+let roll = document.getElementById('roll-number')
+let vname = document.getElementById('idname')
+let email = document.getElementById('email')
+let mobileNum = document.getElementById('mobile-number')
+if(savedNum==roll.value)
+{
+//console.log(doc.data().ROLLNo, doc.data().NAME, doc.data().EMAILID, doc.data().MOBILENo)
+roll.value = savedNum
+vname.value = doc.data().NAME
+email.value = doc.data().EMAILID
+mobileNum.value = doc.data().MOBILENo
+}
+})
+})
 }
 </script>
 </body>
